@@ -14,4 +14,4 @@ jobs:
           npm install
       - name: Lint check
         run: |
-          npm run lint      
+          npm run lint
