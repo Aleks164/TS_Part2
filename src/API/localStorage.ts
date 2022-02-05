@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import { Baloons, regularItem } from "./memory/baloons";
 import { CRUDType } from "./CRUD";
 
@@ -66,19 +67,16 @@ export class LocalStorage implements LocalStorageType {
       return null;
     }
     const storageList = this.loadLocalStorage();
-    // const newStorageArray = storageList.splice(storageList.indexOf(check), 1);
     const newStorageArray = storageList.filter((task) => task.id !== id);
     this.saveLocalStorage(newStorageArray);
     return Promise.resolve();
   }
 
-  // eslint-disable-next-line class-methods-use-this
   loadLocalStorage(): Baloons[] {
     const jsonStorage = window.localStorage.getItem("baloons") || "[]";
     return JSON.parse(jsonStorage);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   saveLocalStorage(storageList: Baloons[]): void {
     window.localStorage.setItem("baloons", JSON.stringify(storageList));
   }

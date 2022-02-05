@@ -5,7 +5,10 @@ describe("LocalStorage", () => {
   let testLocalStorage: LocalStorageType; let storageDate: Baloons[];
 
   beforeEach(() => {
+
     testLocalStorage = new LocalStorage();
+    jest.useFakeTimers('modern')
+    jest.setSystemTime(new Date(2022, 2, 3, 0, 0, 0).valueOf())
     storageDate = [
       {
         id: 1,
@@ -30,6 +33,9 @@ describe("LocalStorage", () => {
       }
     ];
     testLocalStorage.saveLocalStorage(storageDate);
+  });
+  afterEach(() => {
+    jest.useRealTimers();
   });
 
   it("should find expected Item by id", async () => {
@@ -96,7 +102,6 @@ describe("LocalStorage", () => {
       tags: ["small", "unpainted"]
     };
     const mockDate = new Date(2022, 2, 3, 0, 0, 0);
-    jest.spyOn(global, "Date").mockImplementation(() => mockDate);
     const date = mockDate.valueOf();
 
     const updated = await testLocalStorage.update(1, itemForUpdate);
