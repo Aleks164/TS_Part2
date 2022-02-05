@@ -4,6 +4,7 @@
   "description": "typing skill",
   "main": "index.js",
   "scripts": {
+    "test": "jest --coverage",
     "lint": "prettier --write . && prettier --check . && eslint . --ext .js,.ts && tsc --noEmit",
     "lint:fix": "prettier --write . && eslint . --fix --ext .js,.ts",
     "start": "webpack serve --mode development",
@@ -28,6 +29,7 @@
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "@webpack-cli/serve": "^1.1.0",
+    "babel-jest": "^26.6.3",
     "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^3.0.0",
     "eslint": "^7.32.0",
@@ -37,12 +39,14 @@
     "eslint-plugin-jest": "^24.1.3",
     "handlebars-webpack-plugin": "^2.2.1",
     "husky": "^4.3.4",
+    "jest": "^26.6.3",
+    "jest-localstorage-mock": "^2.4.5",
     "lint-staged": "^10.5.3",
     "prettier": "2.2.1",
     "typescript": "^4.5.4",
     "webpack": "^5.10.0",
     "webpack-cli": "^4.2.0",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^4.7.4"
   },
   "husky": {
     "hooks": {
@@ -61,5 +65,20 @@
     "codecov": "^3.8.1",
     "core-js": "^3.8.1",
     "regenerator-runtime": "^0.13.7"
+  },
+  "jest": {
+    "clearMocks": true,
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": false,
+    "coverageThreshold": {
+      "global": {
+        "branches": 60,
+        "functions": 60,
+        "lines": 60
+      }
+    },
+    "setupFiles": [
+      "jest-localstorage-mock"
+    ]
   }
 }
