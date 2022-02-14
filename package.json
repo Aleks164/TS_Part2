@@ -22,31 +22,44 @@
   },
   "homepage": "https://github.com/Aleks164/TS_Part2#readme",
   "devDependencies": {
-    "@babel/core": "^7.12.9",
-    "@babel/preset-env": "^7.12.10",
-    "@babel/preset-typescript": "^7.12.7",
-    "@types/jest": "^27.4.0",
-    "@typescript-eslint/eslint-plugin": "^4.33.0",
-    "@typescript-eslint/parser": "^4.33.0",
-    "@webpack-cli/serve": "^1.1.0",
-    "babel-jest": "^26.6.3",
-    "babel-loader": "^8.2.2",
-    "clean-webpack-plugin": "^3.0.0",
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-prettier": "^6.15.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jest": "^24.1.3",
-    "handlebars-webpack-plugin": "^2.2.1",
-    "husky": "^4.3.4",
-    "jest": "^26.6.3",
-    "jest-localstorage-mock": "^2.4.5",
-    "lint-staged": "^10.5.3",
-    "prettier": "2.2.1",
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.5",
+    "@babel/plugin-transform-runtime": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
+    "@babel/preset-typescript": "^7.16.5",
+    "@types/jest": "^27.0.3",
+    "@typescript-eslint/eslint-plugin": "^5.8.0",
+    "@typescript-eslint/parser": "^5.8.0",
+    "babel-jest": "^27.4.5",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.5.1",
+    "css-minimizer-webpack-plugin": "^3.3.1",
+    "cssnano": "^5.0.14",
+    "eslint": "^8.5.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jest": "^25.3.0",
+    "html-loader": "^3.0.1",
+    "html-webpack-plugin": "^5.5.0",
+    "husky": "^7.0.4",
+    "jest": "^27.4.5",
+    "lint-staged": "^12.1.4",
+    "mini-css-extract-plugin": "^2.4.5",
+    "postcss-bem-linter": "^3.3.0",
+    "postcss-import": "^14.0.2",
+    "postcss-loader": "^6.2.1",
+    "postcss-preset-env": "^7.1.0",
+    "prettier": "^2.5.1",
+    "style-loader": "^3.3.1",
+    "stylelint": "^14.2.0",
+    "stylelint-config-standard": "^24.0.0",
+    "stylelint-selector-bem-pattern": "^2.1.1",
+    "tslint": "^6.1.3",
     "typescript": "^4.5.4",
-    "webpack": "^5.10.0",
-    "webpack-cli": "^4.2.0",
-    "webpack-dev-server": "^4.7.4"
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.1"
   },
   "husky": {
     "hooks": {
@@ -58,28 +71,10 @@
       "prettier --write",
       "eslint --cache --fix --ext .js,.ts"
     ],
-    "*.{css,md}": "prettier --write"
+    "*.{css,md,yml}": "prettier --write",
+    "*.css": "stylelint --fix"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.12.1",
-    "codecov": "^3.8.1",
-    "core-js": "^3.8.1",
-    "firebase": "^9.6.6",
-    "regenerator-runtime": "^0.13.7"
-  },
-  "jest": {
-    "clearMocks": true,
-    "coverageDirectory": "./coverage/",
-    "collectCoverage": false,
-    "coverageThreshold": {
-      "global": {
-        "branches": 60,
-        "functions": 60,
-        "lines": 60
-      }
-    },
-    "setupFiles": [
-      "jest-localstorage-mock"
-    ]
+    "firebase": "^9.6.6"
   }
 }

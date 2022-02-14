@@ -4,12 +4,56 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=yes">
     <title>Document</title>
 </head>
 
 <body>
-    <script src="./CRUD.js"></script>
+    <div id="newObjField">
+        <form>
+            <div>
+                <label for="color">color</label>
+                <select id="color">
+                    <option value="Red">Red</option>
+                    <option value="White">White</option>
+                    <option value="Green">Green</option>
+                    <option value="Yellow">Yellow</option>
+                    <option value="Blue">Blue</option>
+                    <option value="Pink">Pink</option>
+                </select>
+            </div>
+            <div>
+                <label for="date">date</label>
+                <input type="date" id="theDate" name="dateForGoods" min="2018-01-01" max="2022-12-31">
+            </div>
+            <div class="checkselect">
+                <label for="checkForm">Tags</label>
+                <label><input id="Taglarge" type="checkbox" name=large value="1" checked> large</label>
+                <label><input id="Tagsmall" type="checkbox" name="small" value="2"> small</label>
+                <label><input id="Tagpainted" type="checkbox" name="painted" value="3" checked> painted</label>
+                <label><input id="Tagunpainted" type="checkbox" name="unpainted" value="4"> unpainted</label>
+            </div>
+            <div>
+                <label for="status">status</label>
+                <select id="status">
+                    <option value="sold">sold</option>
+                    <option value="unsold">unsold</option>
+                </select>
+            </div>
+            <div>
+                <p id="buttons"><input id="create" type="submit" value="create data">
+                    <input id="read" type="submit" value="request data by color">
+                    <input id="update" type="submit" value="update data by color">
+                    <input id="delete" type="submit" value="delete data by color">
+
+                </p>
+            </div>
+        </form>
+        <div id="dateBaseView">
+        </div>
+        <div id="shortWindow">
+        </div>
+    </div>
 </body>
 
 </html>
