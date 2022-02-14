@@ -63,17 +63,7 @@
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.7.1"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.js,*.ts": [
-      "prettier --write",
-      "eslint --cache --fix --ext .js,.ts"
-    ],
-    "*.css,md,yml": "prettier --write",
-    "*.css": "stylelint --fix"
+  "dependencies": {
+    "firebase": "^9.6.6"
   }
 }

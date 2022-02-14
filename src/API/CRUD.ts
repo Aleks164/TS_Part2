@@ -1,3 +1,5 @@
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, get, set, child, update, remove } from "firebase/database";
 import "./mysite.css";
@@ -41,7 +43,14 @@ const updateDataButton = document.getElementById("update");
 const deleteDataButton = document.getElementById("delete");
 const dateBaseView = document.getElementById("dateBaseView");
 const shortWindow = document.getElementById("shortWindow");
+let selectFilter = (<HTMLInputElement>document.getElementById("selectFilter")).value;
+let fullBase;
 
+const filterWell = document.getElementById("selectFilter");
+filterWell.addEventListener('change', () => {
+  selectFilter = (<HTMLInputElement>filterWell).value;
+  console.log(selectFilter);
+}, false);
 
 const colorWell = document.getElementById("color");
 colorWell.addEventListener('change', () => {
@@ -103,7 +112,7 @@ export function createTagArray() {
     else { newArr.push("unpainted"); }
   }
   else {
-    newArr.push("large");
+    newArr.push("small");
     if (Tagpainted.checked) {
       newArr.push("painted");
     }
@@ -121,6 +130,37 @@ export function message(text: string) {
   }, 3000)
 }
 
+// export function filterByOption(param: string,curentBase:object) {
+//   const result = {}
+//   switch (param) {
+//     case "Status": {
+//       for (const i in curentBase) {
+//         const item = curentBase[i]
+//         if (item.status === "sold") {
+//           result[i] = item;
+//         }
+
+//       }
+//       return result;
+//     }
+//     case "Date": {
+//       for (const i in curentBase) {
+//         const item = curentBase[i]
+//         if (item.date === "sold") {
+//           result[i] = item;
+//         }        
+//       }
+//       return result;
+//     }
+//     case "reset": {
+//       return 
+//     }
+//     default: {
+//       return param;
+//     }
+//   }
+// }
+
 export function createData() {
   set(ref(db, `baloons/${colorInput}`), {
     "color": colorInput,
@@ -129,7 +169,8 @@ export function createData() {
     "date": dateInput
   })
     .then(() => {
-      message("the data is created");
+      const text = `the ${colorInput} element is created`
+      message(text);
     })
     .catch((error) => {
       message(error);
@@ -141,16 +182,18 @@ export function getData() {
   get(child(dbref, `baloons/${colorInput}`))
     .then((snapshot) => {
       if (snapshot.exists()) {
-        dateBaseView.innerHTML = `<div><p>
+        const text = `<div><p>
                     "color:"${snapshot.val().color} <br>
                     "status:"${snapshot.val().status}<br>
                     "tags:"${snapshot.val().tags}<br>
                     "date:"${snapshot.val().date}<br>
                 </p>
                 </div>`
+        message(text);
       }
       else {
-        message("the element with the specified id was not found")
+        const text = `element "${colorInput}" was not found`
+        message(text);
       }
 
     })
@@ -164,8 +207,9 @@ export function getFullData() {
   get(child(dbref, `baloons`))
     .then((snapshot) => {
       if (snapshot.exists()) {
-        const baseList = JSON.stringify(snapshot.val());
-        let result = baseList.match(/"(\w+)":{.+?]}/g);
+        fullBase = JSON.stringify(snapshot.val());
+        console.log(fullBase)
+        let result = fullBase.match(/"(\w+)":{.+?]}/g);
         result = result.map((el) => `${el} <hr>`);
         dateBaseView.innerHTML = `<div>
         <p>Full data base</p>
@@ -176,7 +220,8 @@ export function getFullData() {
                 </div>`
       }
       else {
-        console.log("nothing");
+        const text = `requested database was not found`
+        message(text);
       }
 
     })
@@ -197,14 +242,16 @@ export function updateData() {
           "date": dateInput
         })
           .then(() => {
-            message("element was updated");
+            const text = `element "${colorInput}" was updated`
+            message(text);
           })
           .catch((error) => {
             message(error);
           });
       }
       else {
-        message("the element with the specified id was not found")
+        const text = `element "${colorInput}" was not found`
+        message(text);
       }
     })
     .catch((error) => {
@@ -212,17 +259,29 @@ export function updateData() {
     });
 };
 
-
 export function deleteData() {
-  remove(ref(db, `baloons/${colorInput}`))
-    .then(() => {
-      message("element was deleted");
+  const dbref = ref(db);
+  get(child(dbref, `baloons/${colorInput}`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        remove(ref(db, `baloons/${colorInput}`))
+          .then(() => {
+            const text = `element "${colorInput}" was deleted`
+            message(text);
+          })
+          .catch((error) => {
+            message(error);
+          });
+      }
+      else {
+        const text = `element "${colorInput}" was not found`
+        message(text);
+      }
     })
     .catch((error) => {
       message(error);
     });
 }
-
 
 createDataButton.addEventListener("click", async (ev) => {
   ev.preventDefault();
@@ -246,7 +305,7 @@ updateDataButton.addEventListener("click", async (ev) => {
 deleteDataButton.addEventListener("click", async (ev) => {
   ev.preventDefault();
   deleteData();
-  getFullData();
+  setTimeout(() => getFullData(), 500);
 });
 
 getFullData();

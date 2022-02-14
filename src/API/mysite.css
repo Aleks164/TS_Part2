@@ -6,6 +6,9 @@ form > div {
 	margin-bottom: 10px;
 	width: 200px;
 }
+.checkselect-popup fieldset input {
+	left: 15px;
+}
 #shortWindow{
 	visibility: hidden;	
 	height: 100px;
@@ -41,7 +44,17 @@ form{
 	width: 250px;
 	overflow-y: auto;
 	height: 70vh;
+	float: left;
 }
+#filter{
+	display: inline-block;
+	width: fit-content;
+	float: left;
+}
+.checkselect-popup fieldset label {
+	padding-left: 32px;
+}
+
 .checkselect {
 	border: 1px solid black;
 	position: relative;
@@ -114,12 +127,8 @@ form{
 	padding: 0;
 	border: none;
 }
-.checkselect-popup fieldset input {
-	left: 15px;
-}		
-.checkselect-popup fieldset label {
-	padding-left: 32px;
-}		
+		
+		
 .checkselect-popup legend {
 	display: block;
 	margin: 0;
