@@ -4,6 +4,7 @@ describe("CRUD", () => {
 
     it("should create expected Item by color", async () => {
 
+        createData();
     });
 
 });
