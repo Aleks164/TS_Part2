@@ -1,6 +1,5 @@
 /* eslint-disable class-methods-use-this */
-import { Baloons, regularItem } from "./memory/baloons";
-import { CRUDType } from "./CRUD";
+import { Baloons, regularItem, CRUDType } from "./memory/baloons";
 
 export interface LocalStorageType extends CRUDType {
   loadLocalStorage(): Baloons[];
