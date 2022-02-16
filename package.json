@@ -2,7 +2,8 @@
   "name": "TS_Part2",
   "version": "1.0.0",
   "description": "typing skill",
-  "main": "index.js",
+  "main": "./src/API/crud.ts",
+  "types": "./src/API/crud.ts",
   "scripts": {
     "test": "jest --detectOpenHandles --coverage",
     "lint": "prettier --write . && prettier --check . && eslint . --ext .js,.ts && tsc --noEmit",
