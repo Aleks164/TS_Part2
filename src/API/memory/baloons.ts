@@ -8,7 +8,6 @@ export interface regularItemWithDate extends regularItem {
 }
 
 export interface Baloons extends regularItemWithDate {
-
   id: number;
 }
 

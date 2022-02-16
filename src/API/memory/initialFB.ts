@@ -8,7 +8,7 @@ const firebaseConfig = {
   projectId: "semiotic-joy-340915",
   storageBucket: "semiotic-joy-340915.appspot.com",
   messagingSenderId: "421555283725",
-  appId: "1:421555283725:web:1659dfa120303018e9f244"
+  appId: "1:421555283725:web:1659dfa120303018e9f244",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -19,7 +19,6 @@ const app = initializeApp(firebaseConfig);
 // export const refEx = obj.ref;
 // export const setEx = obj.set;
 
-
 export const database = {
   db: obj.getDatabase(app),
   get: obj.get,
@@ -27,7 +26,5 @@ export const database = {
   ref: obj.ref,
   set: obj.set,
   remove: obj.remove,
-  update: obj.update
-}
-
-
+  update: obj.update,
+};

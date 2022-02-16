@@ -2,35 +2,35 @@ import { LocalStorage, LocalStorageType } from "./localStorage";
 import { Baloons } from "./memory/baloons";
 
 describe("LocalStorage", () => {
-  let testLocalStorage: LocalStorageType; let storageDate: Baloons[];
+  let testLocalStorage: LocalStorageType;
+  let storageDate: Baloons[];
 
   beforeEach(() => {
-
     testLocalStorage = new LocalStorage();
-    jest.useFakeTimers('modern')
-    jest.setSystemTime(new Date(2022, 2, 3, 0, 0, 0).valueOf())
+    jest.useFakeTimers("modern");
+    jest.setSystemTime(new Date(2022, 2, 3, 0, 0, 0).valueOf());
     storageDate = [
       {
         id: 1,
         color: "red",
         date: 1643699395933,
         status: "sold",
-        tags: ["large", "painted"]
+        tags: ["large", "painted"],
       },
       {
         id: 2,
         color: "green",
         date: 1643700032155,
         status: "sold",
-        tags: ["small", "painted"]
+        tags: ["small", "painted"],
       },
       {
         id: 3,
         color: "white",
         date: 1643700037219,
         status: "unsold",
-        tags: ["large", "unpainted"]
-      }
+        tags: ["large", "unpainted"],
+      },
     ];
     testLocalStorage.saveLocalStorage(storageDate);
   });
@@ -45,10 +45,10 @@ describe("LocalStorage", () => {
 
   it("should find expected Items by Color", async () => {
     expect(await testLocalStorage.getItemByColor("red")).toStrictEqual([
-      storageDate[0]
+      storageDate[0],
     ]);
     expect(await testLocalStorage.getItemByColor("green")).toStrictEqual([
-      storageDate[1]
+      storageDate[1],
     ]);
   });
 
@@ -61,18 +61,18 @@ describe("LocalStorage", () => {
   it("should find expected Items by status", async () => {
     expect(await testLocalStorage.getItemByStatus("sold")).toStrictEqual([
       storageDate[0],
-      storageDate[1]
+      storageDate[1],
     ]);
   });
 
   it("should find expected Items by tags", async () => {
     expect(await testLocalStorage.getItemByTags(["large"])).toStrictEqual([
       storageDate[0],
-      storageDate[2]
+      storageDate[2],
     ]);
     expect(await testLocalStorage.getItemByTags(["painted"])).toStrictEqual([
       storageDate[0],
-      storageDate[1]
+      storageDate[1],
     ]);
   });
 
@@ -80,7 +80,7 @@ describe("LocalStorage", () => {
     const newItem = {
       color: "grey",
       status: "unsold",
-      tags: ["small", "unpainted"]
+      tags: ["small", "unpainted"],
     };
 
     const created = await testLocalStorage.create(newItem);
@@ -91,7 +91,7 @@ describe("LocalStorage", () => {
 
     expect(await testLocalStorage.getItemByTags(["small"])).toStrictEqual([
       storageDate[1],
-      created
+      created,
     ]);
   });
 
@@ -99,7 +99,7 @@ describe("LocalStorage", () => {
     const itemForUpdate = {
       color: "red",
       status: "unsold",
-      tags: ["small", "unpainted"]
+      tags: ["small", "unpainted"],
     };
     const mockDate = new Date(2022, 2, 3, 0, 0, 0);
     const date = mockDate.valueOf();
