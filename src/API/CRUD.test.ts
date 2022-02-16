@@ -1,6 +1,6 @@
 import { Crud, CRUDType } from "./crud";
 
-describe("CRUD", () => {
+describe.skip("CRUD", () => {
   const red = { "color": "Red", "date": "2022-02-14", "status": "sold", "tags": ["small", "painted"] };
   const black = { "color": "Black", "date": "2022-02-14", "status": "sold", "tags": ["small", "painted"] };
   let testCrud: CRUDType;

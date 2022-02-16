@@ -1,7 +1,7 @@
 import { LocalStorage, LocalStorageType } from "./localStorage";
 import { Baloons } from "./memory/baloons";
 
-describe.skip("LocalStorage", () => {
+describe("LocalStorage", () => {
   let testLocalStorage: LocalStorageType; let storageDate: Baloons[];
 
   beforeEach(() => {

@@ -7,40 +7,40 @@ export interface LocalStorageType extends CRUDType {
 }
 
 export class LocalStorage implements LocalStorageType {
+  curentStorage: Baloons[];
+
+  constructor() {
+    this.curentStorage = this.loadLocalStorage();
+  }
+
   async create(newEl: regularItem): Promise<Baloons> {
-    const storageList = this.loadLocalStorage();
     const date = new Date().valueOf();
-    const id = storageList.length + 1;
+    const id = this.curentStorage.length + 1;
     const nextEl = { id, date, ...newEl };
 
-    storageList.push(nextEl);
-    this.saveLocalStorage(storageList);
+    this.curentStorage.push(nextEl);
+    this.saveLocalStorage(this.curentStorage);
     return nextEl;
   }
 
   async getItemById(id: number): Promise<Baloons | null> {
-    const storageList = this.loadLocalStorage();
-    return storageList.find((listEl) => listEl.id === id) || null;
+    return this.curentStorage.find((listEl) => listEl.id === id) || null;
   }
 
   async getItemByColor(color: string): Promise<Baloons[]> {
-    const storageList = this.loadLocalStorage();
-    return storageList.filter((name) => name.color === color);
+    return this.curentStorage.filter((name) => name.color === color);
   }
 
   async getItemByDate(date: number): Promise<Baloons | null> {
-    const storageList = this.loadLocalStorage();
-    return storageList.find((listEl) => listEl.date === date) || null;
+    return this.curentStorage.find((listEl) => listEl.date === date) || null;
   }
 
   async getItemByStatus(Status: string): Promise<Baloons[]> {
-    const storageList = this.loadLocalStorage();
-    return storageList.filter((listEl) => listEl.status === Status);
+    return this.curentStorage.filter((listEl) => listEl.status === Status);
   }
 
   async getItemByTags(Tags: string[]): Promise<Baloons[]> {
-    const storageList = this.loadLocalStorage();
-    return storageList.filter((listEl) =>
+    return this.curentStorage.filter((listEl) =>
       listEl.tags.some((tag) => Tags.includes(tag))
     );
   }
@@ -77,6 +77,7 @@ export class LocalStorage implements LocalStorageType {
   }
 
   saveLocalStorage(storageList: Baloons[]): void {
+    this.curentStorage = storageList;
     window.localStorage.setItem("baloons", JSON.stringify(storageList));
   }
 }

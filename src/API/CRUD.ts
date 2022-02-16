@@ -1,5 +1,4 @@
 /* eslint-disable class-methods-use-this */
-// import { db, getEx, childEx, refEx } from "./memory/initialFB";
 import { database } from "./memory/initialFB";
 import { regularItemWithDate } from "./memory/baloons";
 
@@ -14,7 +13,6 @@ export interface CRUDType {
   updateData(colorInput: string, statusEl?: string, tagArray?: string[], dateInput?: string): Promise<string>
 
 }
-
 
 export class Crud implements CRUDType {
 
