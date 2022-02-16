@@ -16,9 +16,9 @@ export interface CRUDType {
 
   updateData(
     colorInput: string,
-    statusEl?: string,
-    tagArray?: string[],
-    dateInput?: string
+    statusEl: string,
+    tagArray: string[],
+    dateInput: string
   ): Promise<string>;
 }
 
