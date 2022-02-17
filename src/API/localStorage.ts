@@ -14,14 +14,13 @@ export class LocalStorage implements LocalStorageType {
   someStorageName: string;
 
   constructor(someStorageName: string) {
-
     this.someStorageName = someStorageName;
 
     this.curentStorage = this.loadLocalStorage();
   }
 
   async create(newEl: regularItem): Promise<Baloons> {
-    const date = new Date().valueOf();
+    const date = Date.now();
     const id = this.curentStorage.length + 1;
     const nextEl = { id, date, ...newEl };
 
@@ -57,9 +56,9 @@ export class LocalStorage implements LocalStorageType {
     if (!check) {
       return null;
     }
-    await this.delete(id);
-    const storageList = this.loadLocalStorage();
-    const date = new Date().valueOf();
+    let storageList = this.loadLocalStorage();
+    storageList = storageList.filter((task) => task.id !== id);
+    const date = Date.now();
     const updatedEl = { id, date, ...elForUpdate };
 
     storageList.push(updatedEl);
@@ -79,12 +78,16 @@ export class LocalStorage implements LocalStorageType {
   }
 
   loadLocalStorage(): Baloons[] {
-    const jsonStorage = window.localStorage.getItem(this.someStorageName) || "[]";
+    const jsonStorage =
+      window.localStorage.getItem(this.someStorageName) || "[]";
     return JSON.parse(jsonStorage);
   }
 
   saveLocalStorage(storageList: Baloons[]): void {
     this.curentStorage = storageList;
-    window.localStorage.setItem(this.someStorageName, JSON.stringify(storageList));
+    window.localStorage.setItem(
+      this.someStorageName,
+      JSON.stringify(storageList)
+    );
   }
 }

@@ -1,90 +1,66 @@
 /* eslint-disable class-methods-use-this */
 import { database } from "./memory/initialFB";
-import { regularItemWithDate } from "./memory/baloons";
+import { Baloons } from "./memory/baloons";
 
 export interface CRUDType {
-  getData(colorInput: string): Promise<regularItemWithDate | string>;
+  getData(id: number): Promise<Baloons | string>;
 
-  createData(
-    colorInput: string,
-    statusEl: string,
-    tagArray: string[],
-    dateInput: string
-  ): Promise<string>;
+  createData(creatingObject: Baloons): Promise<string>;
 
-  deleteData(colorInput: string): Promise<string>;
+  deleteData(id: number): Promise<string>;
 
-  updateData(
-    colorInput: string,
-    statusEl: string,
-    tagArray: string[],
-    dateInput: string
-  ): Promise<string>;
+  updateData(updatingObject: Baloons): Promise<string>;
 }
 
 export class Crud implements CRUDType {
-  async getData(colorInput: string): Promise<regularItemWithDate | string> {
+  async getData(id: number): Promise<Baloons | string> {
     const dbref = database.ref(database.db);
     return database
-      .get(database.child(dbref, `baloons/${colorInput}`))
+      .get(database.child(dbref, `baloons/${id}`))
       .then((snapshot) => {
         if (snapshot.exists()) {
           return snapshot.val();
         }
-        return "truble";
+        return `object with id=${id} not found`;
       })
       .catch((error) => {
         return error;
       });
   }
 
-  async createData(
-    colorInput: string,
-    statusEl: string,
-    tagArray: string[],
-    dateInput: string
-  ): Promise<string> {
+  async createData(creatingObject: Baloons): Promise<string> {
     return database
-      .set(database.ref(database.db, `baloons/${colorInput}`), {
-        color: colorInput,
-        status: statusEl,
-        tags: tagArray,
-        date: dateInput,
-      })
+      .set(
+        database.ref(database.db, `baloons/${creatingObject.id}`),
+        creatingObject
+      )
       .then(() => {
-        return "ok";
+        return creatingObject;
       })
       .catch((error) => {
         return error;
       });
   }
 
-  async deleteData(colorInput: string): Promise<string> {
+  async deleteData(id: number): Promise<string> {
     return database
-      .set(database.ref(database.db, `baloons/${colorInput}`), null)
+      .set(database.ref(database.db, `baloons/${id}`), null)
       .then(() => {
-        return "deleted";
+        return null;
       })
       .catch((error) => {
         return error;
       });
   }
 
-  async updateData(
-    colorInput: string,
-    statusEl: string,
-    tagArray: string[],
-    dateInput: string
-  ): Promise<string> {
+  async updateData(updatingObject: Baloons): Promise<string> {
     return database
-      .update(database.ref(database.db, `baloons/${colorInput}`), {
-        color: colorInput,
-        status: statusEl,
-        tags: tagArray,
-        date: dateInput,
-      })
+      .update(
+        database.ref(database.db, `baloons/${updatingObject.id}`),
+        updatingObject
+      )
       .then(() => {
-        return `updated`;
+        return updatingObject;
       })
       .catch((error) => {
         return error;

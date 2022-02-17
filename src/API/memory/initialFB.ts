@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import * as obj from "firebase/database";
+import * as FBdatabase from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAOR5jK5Bl_N1L3m367rIXRhCwrzTa6Wkg",
@@ -14,11 +14,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export const database = {
-  db: obj.getDatabase(app),
-  get: obj.get,
-  child: obj.child,
-  ref: obj.ref,
-  set: obj.set,
-  remove: obj.remove,
-  update: obj.update,
+  db: FBdatabase.getDatabase(app),
+  get: FBdatabase.get,
+  child: FBdatabase.child,
+  ref: FBdatabase.ref,
+  set: FBdatabase.set,
+  remove: FBdatabase.remove,
+  update: FBdatabase.update,
 };

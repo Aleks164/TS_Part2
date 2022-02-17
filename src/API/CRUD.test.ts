@@ -2,14 +2,16 @@ import { Crud, CRUDType } from "./CRUD";
 
 describe("CRUD", () => {
   const red = {
+    id: 1,
     color: "Red",
-    date: "2022-02-14",
+    date: 1643700032155,
     status: "sold",
     tags: ["small", "painted"],
   };
   const black = {
+    id: 2,
     color: "Black",
-    date: "2022-02-14",
+    date: 1643700032155,
     status: "sold",
     tags: ["small", "painted"],
   };
@@ -18,44 +20,24 @@ describe("CRUD", () => {
     testCrud = new Crud();
   });
   it("should Get expected Item by color", async () => {
-    expect(await testCrud.getData("Red")).toStrictEqual(red);
+    expect(await testCrud.createData(red)).toBe(red); // dell
+    expect(await testCrud.getData(1)).toStrictEqual(red);
   });
   it("should create expected Item by color", async () => {
-    expect(await testCrud.getData("Black")).toStrictEqual("truble");
-    expect(
-      await testCrud.createData(
-        "Black",
-        "sold",
-        ["small", "painted"],
-        "2022-02-14"
-      )
-    ).toStrictEqual("ok");
-    expect(await testCrud.getData("Black")).toStrictEqual(black);
+    expect(await testCrud.getData(2)).toBe("object with id=2 not found");
+    expect(await testCrud.createData(black)).toBe(black);
+    expect(await testCrud.getData(2)).toStrictEqual(black);
   });
   it("should delete expected Item by color", async () => {
-    expect(await testCrud.getData("Black")).toStrictEqual(black);
-    expect(await testCrud.deleteData("Black")).toStrictEqual("deleted");
-    expect(await testCrud.getData("Black")).toStrictEqual("truble");
+    expect(await testCrud.getData(2)).toStrictEqual(black);
+    expect(await testCrud.deleteData(2)).toBe(null);
+    expect(await testCrud.getData(2)).toBe("object with id=2 not found");
   });
   it("should update expected Item by color", async () => {
     const updetedRed = { ...red, status: "unsold" };
-    expect(
-      await testCrud.updateData(
-        "Red",
-        "unsold",
-        ["small", "painted"],
-        "2022-02-14"
-      )
-    ).toStrictEqual("updated");
-    expect(await testCrud.getData("Red")).toStrictEqual(updetedRed);
-    expect(
-      await testCrud.updateData(
-        "Red",
-        "sold",
-        ["small", "painted"],
-        "2022-02-14"
-      )
-    ).toStrictEqual("updated");
-    expect(await testCrud.getData("Red")).toStrictEqual(red);
+    expect(await testCrud.updateData(updetedRed)).toBe(updetedRed);
+    expect(await testCrud.getData(1)).toStrictEqual(updetedRed);
+    expect(await testCrud.updateData(red)).toBe(red);
+    expect(await testCrud.getData(1)).toStrictEqual(red);
   });
 });
