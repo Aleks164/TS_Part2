@@ -1,6 +1,8 @@
 /* eslint-disable class-methods-use-this */
 import { Baloons, regularItem, CRUDType } from "./memory/baloons";
 
+export const storageName = "baloons";
+
 export interface LocalStorageType extends CRUDType {
   loadLocalStorage(): Baloons[];
   saveLocalStorage(storageArray: Baloons[]): void;
@@ -9,7 +11,12 @@ export interface LocalStorageType extends CRUDType {
 export class LocalStorage implements LocalStorageType {
   curentStorage: Baloons[];
 
-  constructor() {
+  someStorageName: string;
+
+  constructor(someStorageName: string) {
+
+    this.someStorageName = someStorageName;
+
     this.curentStorage = this.loadLocalStorage();
   }
 
@@ -72,12 +79,12 @@ export class LocalStorage implements LocalStorageType {
   }
 
   loadLocalStorage(): Baloons[] {
-    const jsonStorage = window.localStorage.getItem("baloons") || "[]";
+    const jsonStorage = window.localStorage.getItem(this.someStorageName) || "[]";
     return JSON.parse(jsonStorage);
   }
 
   saveLocalStorage(storageList: Baloons[]): void {
     this.curentStorage = storageList;
-    window.localStorage.setItem("baloons", JSON.stringify(storageList));
+    window.localStorage.setItem(this.someStorageName, JSON.stringify(storageList));
   }
 }

@@ -1,4 +1,4 @@
-import { LocalStorage, LocalStorageType } from "./localStorage";
+import { LocalStorage, LocalStorageType, storageName } from "./localStorage";
 import { Baloons } from "./memory/baloons";
 
 describe("LocalStorage", () => {
@@ -6,7 +6,7 @@ describe("LocalStorage", () => {
   let storageDate: Baloons[];
 
   beforeEach(() => {
-    testLocalStorage = new LocalStorage();
+    testLocalStorage = new LocalStorage(storageName);
     jest.useFakeTimers("modern");
     jest.setSystemTime(new Date(2022, 2, 3, 0, 0, 0).valueOf());
     storageDate = [
