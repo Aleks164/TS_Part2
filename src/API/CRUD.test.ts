@@ -1,4 +1,4 @@
-import { Crud, CRUDType } from "./crud";
+import { Crud, CRUDType } from "./CRUD";
 
 describe("CRUD", () => {
   const red = {

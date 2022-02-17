@@ -13,12 +13,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-// export const db = obj.getDatabase(app);
-// export const getEx = obj.get;
-// export const childEx = obj.child;
-// export const refEx = obj.ref;
-// export const setEx = obj.set;
-
 export const database = {
   db: obj.getDatabase(app),
   get: obj.get,
