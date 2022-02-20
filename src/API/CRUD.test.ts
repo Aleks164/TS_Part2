@@ -1,4 +1,9 @@
 import { Crud, CRUDType } from "./CRUD";
+import { database } from "./memory/initialFB";
+
+type db = {
+  offline: () => void;
+}
 
 describe("CRUD", () => {
   const red = {
@@ -18,6 +23,9 @@ describe("CRUD", () => {
   let testCrud: CRUDType;
   beforeEach(() => {
     testCrud = new Crud();
+  });
+  afterAll(() => {
+    (database as unknown as db).offline();
   });
   it("should Get expected Item by color", async () => {
     expect(await testCrud.createData(red)).toBe(red); // dell

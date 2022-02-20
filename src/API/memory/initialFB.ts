@@ -21,4 +21,5 @@ export const database = {
   set: FBdatabase.set,
   remove: FBdatabase.remove,
   update: FBdatabase.update,
+  offline: FBdatabase.goOffline
 };

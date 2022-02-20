@@ -108,8 +108,8 @@ describe("LocalStorage", () => {
 
     expect(updated).toStrictEqual({ id: 1, date, ...itemForUpdate });
 
-    const currentStorageArray = testLocalStorage.loadLocalStorage();
-    expect(currentStorageArray[currentStorageArray.length - 1]).toStrictEqual(
+    const currentStorageUpdatedEl = await testLocalStorage.getItemById(1);
+    expect(currentStorageUpdatedEl).toStrictEqual(
       updated
     );
   });

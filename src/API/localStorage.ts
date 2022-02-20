@@ -56,13 +56,12 @@ export class LocalStorage implements LocalStorageType {
     if (!check) {
       return null;
     }
-    let storageList = this.loadLocalStorage();
-    storageList = storageList.filter((task) => task.id !== id);
+    this.curentStorage = this.curentStorage.filter((task) => task.id !== id);
     const date = Date.now();
     const updatedEl = { id, date, ...elForUpdate };
 
-    storageList.push(updatedEl);
-    this.saveLocalStorage(storageList);
+    this.curentStorage.push(updatedEl);
+    this.saveLocalStorage(this.curentStorage);
     return updatedEl;
   }
 
@@ -71,9 +70,8 @@ export class LocalStorage implements LocalStorageType {
     if (!check) {
       return null;
     }
-    const storageList = this.loadLocalStorage();
-    const newStorageArray = storageList.filter((task) => task.id !== id);
-    this.saveLocalStorage(newStorageArray);
+    this.curentStorage = this.curentStorage.filter((task) => task.id !== id);
+    this.saveLocalStorage(this.curentStorage);
     return Promise.resolve();
   }
 
